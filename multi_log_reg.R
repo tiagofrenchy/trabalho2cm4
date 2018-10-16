@@ -1,9 +1,12 @@
 library(readxl)
 library(PerformanceAnalytics)
 library(nnet)
+library(Amelia)
+library(mlbench)
+library(caTools)
 
 #Sets working directory for syncronization with GitHub
-setwd("/users/TSiqueira/Documents/trabalho2cm4")
+setwd("~/Downloads/CM4T2")
 
 #Creates inital data frame fot T2
 initdf <- read_excel("BDLOGIST_GRUPO_11.xlsx")
@@ -15,19 +18,32 @@ pairs(initdf[2:24])
 #### travail en cours
 chart.Correlation(initdf, method="pearson", histogram=TRUE, pch=16)
 
+resultsListBart <- list()
+for (i in colnames(initdf)[2:23]) {
+  #name <- sprintf("%s ~ %s","lmfit obito", i) 
+  fit <- bartlett.test(substitute(obito ~ i, list(i = as.name(i))),data = initdf)
+  resultsList[[i]] <- summary(fit)
+  print(summary(fit))
+}
+
 #Univariate linear regression for all variables 
 resultsList <- list()
 for (i in colnames(initdf)[2:23]) {
   #name <- sprintf("%s ~ %s","lmfit obito", i) 
-  fit <- lm(substitute(obito ~ i, list(i = as.name(i))), data = initdf)
+  fit <- glm(substitute(obito ~ i, list(i = as.name(i))),family = binomial(logit), data = initdf)
   resultsList[[i]] <- summary(fit)
+  print(summary(fit))
 }
 
 #Multiple linear regression of ALL variables
-fitall <- lm(obito ~ ., data = initdf[2:24])
+fitall <- glm(obito ~ .,family = binomial(logit), data = initdf[2:24])
 summary(fitall)
 
 #Multiple linear regression of SELECTED variables
-select <- ""
-fitselect <- lm(substitute(obito ~ select, list(select = as.name(select))), data = initdf)
+fitselect <- glm(obito ~ idade+biapos+sbdc+bic_cat+creat_cat+album+gao2_cat+tcec,family = binomial(logit) , data = initdf)
 summary(fitselect)
+
+#Multiple linear regression of SELECTED AGAIN variables
+fitselect2 <- glm(obito ~ sbdc+bic_cat+tcec,family = binomial(logit) , data = initdf)
+summary(fitselect2)
+

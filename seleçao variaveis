@@ -1,3 +1,13 @@
+ Analise os dados e identifique os fatores associados à mortalidade. Como estratégia de análise use os passos a seguir:
+
+Ajuste um modelo de regressão logística simples para cada uma das variáveis explicativas de interesse (Análise “univariada”);
+A partir dos modelos de regressão logística simples, selecione as variáveis que serão incluídas em um modelo de regressão logística múltipla (Análise “multivariada”). Para as variáveis que estão em duas formas (quantitativa e qualitativa) escolha qual acha mais adequada (justifique a escolha).
+Ajuste um modelo de regressão logística múltipla completo, isto é, contendo todas as variáveis selecionadas na análise “univariada”;
+A partir do modelo completo ajustado, selecione passo a passo as variáveis que podem ser retiradas do modelo com base no valor – p de cada variável, até obter um modelo reduzido apenas com as variáveis importantes para explicar a mortalidade intra-hospitalar. Caso ache razoável, você pode manter alguma variável no modelo, independentemente da significância estatística.
+A partir do modelo obtido do item anterior, investigue os possíveis efeitos de interação entre as variáveis explicativas. Caso haja alguma interação significante, tente interpretá-la.
+ Ao final, monte um relatório de no máximo 3 páginas com a descrição da metodologia, uma tabela ou gráfico com os resultados da "análise multivariada" (modelo completo e reduzido) e um texto breve com a interpretação dos resultados.
+
+
 precisamos de significancia tanto no intercept quanto na variavel?
 
 idade        0.0024900  0.0009862   2.525   0.0118 *
